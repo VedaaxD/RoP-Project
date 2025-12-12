@@ -1,0 +1,16 @@
+cat > requirements.txt <<'REQ'
+numpy
+pandas
+scikit-learn
+opencv-python
+matplotlib
+scikit-image
+tqdm
+joblib
+pillow
+jupyterlab
+REQ
+
+git add requirements.txt
+git commit -m "chore: add requirements.txt"
+git push
