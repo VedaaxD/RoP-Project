@@ -1,0 +1,43 @@
+cat > .gitignore <<'GITIGNORE'
+# Python / bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# virtualenvs
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/
+
+# models / artifacts
+*.joblib
+*.pkl
+*.pt
+*.pth
+*.h5
+
+# data and heavy outputs (do NOT commit images/datasets)
+data/
+datasets/
+images/
+images_stack_without_captions/
+misclassified/
+sample_visualizations/
+report_confusion.png
+test_predictions_sample_level.csv
+model.joblib
+scaler.joblib
+
+# OS
+.DS_Store
+Thumbs.db
+
+GITIGNORE
