@@ -158,5 +158,80 @@ This is a disease-state classifier, not stage-wise severity classification.
 
 Install required packages:
 
-```bash
+bash
 pip install numpy pandas scikit-learn opencv-python pillow matplotlib tqdm joblib scikit-image
+
+
+
+## Usage
+
+Each script supports two modes: `train` and `predict`.
+
+### Training a Model
+
+
+python <script_name>.py --mode train \
+--base_dir /path/to/images \
+--csv metadata.csv
+
+During training, the pipeline performs:
+
+Metadata loading and validation
+Image collection grouped by patient
+Image preprocessing (resize, CLAHE, circular mask)
+Feature extraction (HOG or Sobel)
+Sample-level feature aggregation
+Patient-level train/test split using GroupShuffleSplit
+Feature scaling using StandardScaler
+Hyperparameter tuning with GridSearchCV
+SVM training (RBF kernel)
+Evaluation and artifact generation
+
+### Outputs
+
+After training, the following artifacts are generated:
+| File            | Description            |
+| --------------- | ---------------------- |
+| `model.joblib`  | Trained SVM classifier |
+| `scaler.joblib` | Fitted feature scaler  |
+
+### Sample-Level Predictions
+test_predictions_sample_level.csv contains:
+| Column    | Description        |
+| --------- | ------------------ |
+| sample_id | Patient folder ID  |
+| id_int    | Numeric patient ID |
+| label     | Ground truth label |
+| pred      | Predicted label    |
+
+
+### Future Improvements
+1. Feature Fusion
+Combine: HOG, Sobel, Color histograms, Vessel enhancement filters (e.g., Frangi)
+To improve discriminative power.
+
+2. Stage-Wise ROP Classification
+Extend from grouped "ROP" to:
+Stage 1
+Stage 2
+Stage 3
+Stage 4
+Stage 5
+AP-ROP
+For finer clinical grading.
+
+3. Group-Based Cross-Validation
+Implement K-fold group cross-validation to:
+
+Improve statistical reliability
+Report confidence intervals
+
+4. Deep Learning Baselines
+
+Next project phase includes:
+Transfer learning (ResNet, EfficientNet)
+End-to-end CNN training
+Grad-CAM explainability
+
+To compare classical ML with deep learning approaches.
+
